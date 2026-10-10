@@ -35,7 +35,9 @@
   /* Nav */
   header.nav {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 20px clamp(20px, 4vw, 48px);
+    /* Same left/right edges as .wrap so the avatar, headline and cards line up */
+    --pad: clamp(20px, 4vw, 48px);
+    padding: 20px max(var(--pad), calc((100% - var(--maxw)) / 2 + var(--pad)));
     position: relative; z-index: 2;
   }
   .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; font-size: 15px; }
@@ -52,10 +54,18 @@
   .page { display: none; }
   .page.active { display: block; }
   .wash { background: var(--wash); margin-top: -77px; padding-top: 77px; }
+  .wash.long {
+    background:
+      radial-gradient(ellipse 70% 40% at 0% 0%, #cfdcff 0%, rgba(207,220,255,0) 100%),
+      radial-gradient(ellipse 70% 40% at 100% 12%, #ffe6d4 0%, rgba(255,230,212,0) 100%),
+      radial-gradient(ellipse 70% 35% at 0% 60%, #dbe5ff 0%, rgba(219,229,255,0) 100%),
+      radial-gradient(ellipse 70% 35% at 100% 100%, #ffeadb 0%, rgba(255,234,219,0) 100%),
+      #ffffff;
+  }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
 
   /* Hero */
-  .hero { padding: clamp(48px, 9vw, 110px) 0 clamp(48px, 7vw, 90px); }
+  .hero { padding-block: clamp(48px, 9vw, 110px) clamp(48px, 7vw, 90px); }
   .hero h1 {
     font-weight: 300; font-size: clamp(30px, 5.4vw, 60px);
     line-height: 1.15; letter-spacing: -0.02em; margin: 0; max-width: 17em;
@@ -88,7 +98,7 @@
   .soon { display: inline-block; margin-left: 10px; font-size: 13px; color: var(--muted); }
 
   /* Case study */
-  .cs-hero { text-align: center; padding: clamp(48px, 8vw, 96px) 0 48px; }
+  .cs-hero { text-align: center; padding-block: clamp(48px, 8vw, 96px) 48px; }
   .cs-hero h1 {
     font-size: clamp(28px, 4.4vw, 52px); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
     margin: 0 auto 28px; max-width: 18em;
@@ -115,7 +125,7 @@
   .quote blockquote { margin: 0 auto; max-width: 780px; border-left: 3px solid var(--ink); padding-left: 28px; }
   .quote blockquote p { font-size: clamp(22px, 3vw, 34px); font-weight: 500; line-height: 1.3; margin: 0 0 18px; }
   .quote cite { font-style: normal; color: var(--muted); font-size: 15px; }
-  .closing { text-align: center; padding: 72px 0 96px; }
+  .closing { text-align: center; padding-block: 72px 96px; }
   .closing h2 { font-size: clamp(26px, 3.6vw, 42px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; max-width: 16em; margin: 0 auto; }
 
   /* About */
@@ -170,17 +180,16 @@
 
 <!-- SHOWCASE -->
 <section class="page" id="page-home" data-title="Lilly Sosa | AI-focused designer">
-  <div class="wash">
+  <div class="wash long">
     <div class="wrap hero">
       <h1>AI-focused designer at <span class="yt">YouTube</span>, crafting intuitive experiences powered by Gen AI to elevate human potential. My approach is rooted in deep user understanding, strategic vision, and fostering a collaborative design culture where innovation thrives.</h1>
     </div>
-  </div>
   <div class="wrap">
     <div class="grid">
       <article class="card">
         <a class="thumb" href="#/inspiration" style="--c1:#c9d8ff;--c2:#e9e2ff" aria-label="Read the Inspiration Tab case study">
-          <span class="ph">images/inspiration-tab.png</span>
-          <img src="images/inspiration-tab.png" alt="YouTube Studio Inspiration tab" onerror="this.remove()">
+          <span class="ph">images/inspiration-tab.jpg</span>
+          <img src="images/inspiration-tab.jpg" alt="YouTube Studio Inspiration tab" onerror="this.remove()">
         </a>
         <h2>Sparking Creativity with AI: The YouTube Inspiration Tab</h2>
         <p>Led the end-to-end UX for the AI-powered Inspiration tab within YouTube Studio, shaping the strategic vision and roadmap. This Gen AI experience supercharges creators' brainstorming, empowering them to unlock their full creative potential.</p>
@@ -217,6 +226,7 @@
         <button class="btn" type="button" aria-disabled="true">Explore</button><span class="soon">Case study coming soon</span>
       </article>
     </div>
+  </div>
   </div>
 </section>
 
@@ -328,10 +338,10 @@
       <p>What drives my work is a blend of deep user understanding and a bold vision for innovation. I love simplifying complex technology problems and collaboratively building solutions that are not only intuitive but also bring value to users. Throughout my career at Google Drive and now YouTube, I've had the privilege of leading high-impact projects that have reached hundreds of millions of users, driving adoption and boosting productivity and creativity. I actively champion a collaborative environment where diverse voices contribute to stronger, more innovative solutions, always ensuring the user's perspective is at the heart of every decision.</p>
     </div>
     <div class="photos">
-      <div class="shot"><span class="ph">images/ski.jpg</span><img src="images/ski.jpg" alt="Skiing in the Alps" onerror="this.remove()"></div>
-      <div class="shot"><span class="ph">images/bike.jpg</span><img src="images/bike.jpg" alt="Mountain biking on a forest trail" onerror="this.remove()"></div>
-      <div class="shot"><span class="ph">images/ridge.jpg</span><img src="images/ridge.jpg" alt="Climbing a rocky ridge" onerror="this.remove()"></div>
-      <div class="shot"><span class="ph">images/summit.jpg</span><img src="images/summit.jpg" alt="Standing on a mountain summit" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/ski.png</span><img src="images/ski.png" alt="Skiing in the Alps" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/bike.png</span><img src="images/bike.png" alt="Mountain biking on a forest trail" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/ridge.png</span><img src="images/ridge.png" alt="Climbing a rocky ridge" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/summit.png</span><img src="images/summit.png" alt="Standing on a mountain summit" onerror="this.remove()"></div>
     </div>
     <hr>
     <div class="section">
@@ -359,16 +369,28 @@
 <script>
   // Tiny hash router: #/ , #/about , #/inspiration
   var pages = { "/": "page-home", "/about": "page-about", "/inspiration": "page-inspiration" };
-  function route() {
-    var h = location.hash;
-    if (h === "#overview") return; // in-page anchor on the case study
-    var key = h.replace(/^#/, "") || "/";
+  function show(key) {
     var id = pages[key] || "page-home";
     document.querySelectorAll(".page").forEach(function (p) { p.classList.toggle("active", p.id === id); });
     document.title = document.getElementById(id).dataset.title;
     window.scrollTo(0, 0);
   }
+  function route() {
+    var h = location.hash;
+    if (h === "#overview") return; // in-page anchor on the case study
+    show(h.replace(/^#/, "") || "/");
+  }
+  // Handle nav clicks directly so it also works in sandboxed previews
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a[href^="#/"]');
+    if (!a) return;
+    e.preventDefault();
+    var key = a.getAttribute("href").slice(1);
+    show(key);
+    try { history.pushState(null, "", "#" + key); } catch (err) {}
+  });
   window.addEventListener("hashchange", route);
+  window.addEventListener("popstate", route);
   route();
 
   // Overview link scrolls without breaking the router
