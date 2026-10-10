@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lilly Sosa | AI-focused designer</title>
+<meta name="description" content="Lilly Sosa is an AI-focused designer at YouTube, crafting intuitive experiences powered by Gen AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --muted: #5f5f66;
+    --line: #dcdce0;
+    --bg: #ffffff;
+    --blush: #fde3d6;
+    --wash: linear-gradient(135deg, #cfdcff 0%, #ffffff 45%, #ffe9d9 100%);
+    --accent: linear-gradient(90deg, #c97ab0, #e8956b);
+    --maxw: 1080px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid #4a6cf7; outline-offset: 3px; border-radius: 4px; }
+
+  /* Nav */
+  header.nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px clamp(20px, 4vw, 48px);
+    position: relative; z-index: 2;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; font-size: 15px; }
+  .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #9db4ff, #ffb48a);
+    overflow: hidden; flex: none; display: block;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  nav ul { display: flex; gap: 16px; list-style: none; margin: 0; padding: 0; font-size: 13px; }
+  nav a { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Page frames */
+  .page { display: none; }
+  .page.active { display: block; }
+  .wash { background: var(--wash); margin-top: -77px; padding-top: 77px; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  /* Hero */
+  .hero { padding: clamp(48px, 9vw, 110px) 0 clamp(48px, 7vw, 90px); }
+  .hero h1 {
+    font-weight: 300; font-size: clamp(30px, 5.4vw, 60px);
+    line-height: 1.15; letter-spacing: -0.02em; margin: 0; max-width: 17em;
+  }
+  .hero h1 .yt {
+    font-weight: 600;
+    background: var(--accent); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* Project grid */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 64px 40px; padding-bottom: 96px; }
+  .card h2 { font-size: clamp(20px, 2.2vw, 26px); font-weight: 600; line-height: 1.25; margin: 22px 0 12px; letter-spacing: -0.01em; }
+  .card p { color: var(--muted); font-size: 15px; margin: 0 0 22px; max-width: 34em; }
+  .thumb {
+    display: block; aspect-ratio: 4 / 3; border-radius: 6px; overflow: hidden;
+    background: linear-gradient(135deg, var(--c1), var(--c2));
+    position: relative;
+  }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; }
+  .thumb .ph {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-size: 13px; color: rgba(0,0,0,.45); padding: 16px; text-align: center;
+  }
+  .btn {
+    display: inline-block; background: var(--ink); color: #fff; text-decoration: none;
+    border: 0; border-radius: 8px; padding: 12px 20px; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  .btn.light { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+  .btn[aria-disabled="true"] { opacity: .55; cursor: default; }
+  .soon { display: inline-block; margin-left: 10px; font-size: 13px; color: var(--muted); }
+
+  /* Case study */
+  .cs-hero { text-align: center; padding: clamp(48px, 8vw, 96px) 0 48px; }
+  .cs-hero h1 {
+    font-size: clamp(28px, 4.4vw, 52px); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+    margin: 0 auto 28px; max-width: 18em;
+  }
+  .cs-hero .row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .shot {
+    margin: 48px auto 0; max-width: 900px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(135deg, #e5ecff, #fff0e6); border: 1px solid var(--line);
+    position: relative;
+  }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; position: relative; }
+  .shot .ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; color: rgba(0,0,0,.45); }
+  .block { padding: 64px 0 8px; max-width: 760px; margin: 0 auto; }
+  .block h2 { font-size: clamp(24px, 3vw, 34px); margin: 0 0 14px; letter-spacing: -0.01em; }
+  .block ul { padding-left: 20px; margin: 0; }
+  .block li { margin: 0 0 10px; }
+  .block p { margin: 0; color: #2a2a2e; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin: 40px 0 0; }
+  .three figure { margin: 0; }
+  .three .shot { margin: 0 0 16px; aspect-ratio: 4 / 3; border-radius: 10px; }
+  .three h3 { font-size: 17px; margin: 0 0 6px; }
+  .three p { font-size: 14px; color: var(--muted); }
+  .quote { background: var(--blush); margin: 72px 0 0; padding: clamp(48px, 7vw, 88px) 0; }
+  .quote blockquote { margin: 0 auto; max-width: 780px; border-left: 3px solid var(--ink); padding-left: 28px; }
+  .quote blockquote p { font-size: clamp(22px, 3vw, 34px); font-weight: 500; line-height: 1.3; margin: 0 0 18px; }
+  .quote cite { font-style: normal; color: var(--muted); font-size: 15px; }
+  .closing { text-align: center; padding: 72px 0 96px; }
+  .closing h2 { font-size: clamp(26px, 3.6vw, 42px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; max-width: 16em; margin: 0 auto; }
+
+  /* About */
+  .about-hero { padding: clamp(40px, 7vw, 80px) 0 56px; max-width: 880px; }
+  .about-hero p { font-size: clamp(26px, 4vw, 44px); font-weight: 300; line-height: 1.25; letter-spacing: -0.015em; margin: 0; }
+  .about-hero b { font-weight: 700; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 0; }
+  .section { padding: 56px 0; }
+  .section h2 { font-size: clamp(26px, 3.2vw, 36px); line-height: 1.2; margin: 0 0 22px; letter-spacing: -0.01em; }
+  .section p { color: #3a3a40; font-size: 15px; max-width: 46em; margin: 0 0 18px; }
+  .journey { list-style: none; padding: 0; margin: 0; max-width: 780px; }
+  .journey li { display: grid; grid-template-columns: 120px 1fr; align-items: baseline; gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .journey li:last-child { border-bottom: 0; }
+  .journey span { font-size: 13px; color: var(--muted); }
+  .journey strong { font-size: clamp(17px, 2vw, 22px); font-weight: 600; }
+  .photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 8px 0 56px; }
+  .photos .shot { margin: 0; aspect-ratio: 3 / 4; border-radius: 12px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); margin-top: 0; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; padding-bottom: 28px; }
+  footer strong { font-weight: 600; font-size: 15px; }
+  .social { display: flex; gap: 18px; align-items: center; }
+  .social a { display: inline-flex; width: 24px; height: 24px; }
+  .social svg { width: 100%; height: 100%; }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 48px; }
+    .three { grid-template-columns: 1fr; }
+    .photos { grid-template-columns: repeat(2, 1fr); }
+    .journey li { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="#/">
+    <span class="avatar"><img src="images/lilly.jpg" alt="Lilly Sosa" onerror="this.remove()"></span>
+    <span>Lilly Sosa</span>
+  </a>
+  <nav aria-label="Main">
+    <ul>
+      <li><a href="#/">Showcase</a></li>
+      <li><a href="#/about">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- SHOWCASE -->
+<section class="page" id="page-home" data-title="Lilly Sosa | AI-focused designer">
+  <div class="wash">
+    <div class="wrap hero">
+      <h1>AI-focused designer at <span class="yt">YouTube</span>, crafting intuitive experiences powered by Gen AI to elevate human potential. My approach is rooted in deep user understanding, strategic vision, and fostering a collaborative design culture where innovation thrives.</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="grid">
+      <article class="card">
+        <a class="thumb" href="#/inspiration" style="--c1:#c9d8ff;--c2:#e9e2ff" aria-label="Read the Inspiration Tab case study">
+          <span class="ph">images/inspiration-tab.png</span>
+          <img src="images/inspiration-tab.png" alt="YouTube Studio Inspiration tab" onerror="this.remove()">
+        </a>
+        <h2>Sparking Creativity with AI: The YouTube Inspiration Tab</h2>
+        <p>Led the end-to-end UX for the AI-powered Inspiration tab within YouTube Studio, shaping the strategic vision and roadmap. This Gen AI experience supercharges creators' brainstorming, empowering them to unlock their full creative potential.</p>
+        <a class="btn" href="#/inspiration">Explore</a>
+      </article>
+
+      <article class="card">
+        <span class="thumb" style="--c1:#f0a0c0;--c2:#ff8f93">
+          <span class="ph">images/trends-tab.png</span>
+          <img src="images/trends-tab.png" alt="YouTube Studio Trends tab on mobile" onerror="this.remove()">
+        </span>
+        <h2>Empowering Creators with Data: YouTube Trends Tab</h2>
+        <p>Led the UX and successful launch of the YouTube Studio Trends tab for both mobile and web. This powerful feature provides critical audience insights to creators, empowering them to validate ideas, spark new content, and amplify their impact on YouTube.</p>
+        <button class="btn" type="button" aria-disabled="true">Explore</button><span class="soon">Case study coming soon</span>
+      </article>
+
+      <article class="card">
+        <span class="thumb" style="--c1:#f6cdb8;--c2:#f3b9a0">
+          <span class="ph">images/drive-notifications.png</span>
+          <img src="images/drive-notifications.png" alt="Google Drive Notification Center" onerror="this.remove()">
+        </span>
+        <h2>Streamlining Productivity: Google Drive's Notification Center</h2>
+        <p>As Mobile UX Lead for Google Drive, I led the UX for the Notification Center. We designed a pivotal hub, empowering users to effortlessly stay updated and productive. This thrilling project transformed the workflow, making it easier for users to unblock tasks and drive their work forward.</p>
+        <button class="btn" type="button" aria-disabled="true">Explore</button><span class="soon">Case study coming soon</span>
+      </article>
+
+      <article class="card">
+        <span class="thumb" style="--c1:#e8b9a6;--c2:#bfd0e0">
+          <span class="ph">images/drive-approvals.png</span>
+          <img src="images/drive-approvals.png" alt="Google Drive file approvals" onerror="this.remove()">
+        </span>
+        <h2>Collaborative Flow: Google Drive's File Approvals</h2>
+        <p>I led the design of file approvals, a critical feature for unblocking team collaboration in Google Drive. My focus was on creating an intuitive and transparent system that streamlines the review process with clear due dates and flexible controls, all directly within the user's workflow.</p>
+        <button class="btn" type="button" aria-disabled="true">Explore</button><span class="soon">Case study coming soon</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY: INSPIRATION TAB -->
+<section class="page" id="page-inspiration" data-title="Inspiration Tab | Lilly Sosa">
+  <div class="wash">
+    <div class="wrap cs-hero">
+      <h1>Leveraging Gen AI to facilitate brainstorming and empower creators to overcome creative block</h1>
+      <div class="row">
+        <a class="btn" href="#overview">Learn more</a>
+        <a class="btn light" href="#" id="watch-video">Watch video</a>
+      </div>
+      <div class="shot">
+        <span class="ph">images/inspiration-hero.png</span>
+        <img src="images/inspiration-hero.png" alt="Inspiration tab in YouTube Studio" onerror="this.remove()">
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="block" id="overview">
+      <h2>Overview</h2>
+      <ul>
+        <li><strong>Product:</strong> The Inspiration Tab in YouTube Studio</li>
+        <li><strong>My role:</strong> UX Lead</li>
+        <li><strong>Team:</strong> 1 UX Lead (me), 1 Visual Designer, 1 Interaction Designer, 1 Content Designer, 1 UX Researcher, 2 PMs, 18+ Engineers</li>
+        <li><strong>Timeline:</strong> 6 months from idea to launch</li>
+        <li><strong>Core challenge:</strong> Pivot a research-focused product ('Trends') into a generative AI tool to meet the rapidly evolving needs of creators, navigating extreme ambiguity and a highly aggressive timeline.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>My role &amp; approach</h2>
+      <p>As UX Lead, I drove the strategic vision and roadmap for this Gen AI experience. I fostered a highly collaborative environment, working with visual design, interaction design, content design, and research to deeply understand and iterate with creators. This agile approach allowed us to move swiftly from initial concept to production in a rapid three-month cycle, laying critical foundations for a scalable product.</p>
+    </div>
+
+    <div class="block" style="max-width:none">
+      <div style="max-width:760px;margin:0 auto">
+        <h2>The challenge</h2>
+        <p>As YouTube creators rapidly adopted GenAI tools in early 2024, we pivoted from the research-focused 'Trends' tab to develop the 'Inspiration' tab, a generative tool designed to support creators' evolving needs.</p>
+      </div>
+      <div class="three">
+        <figure>
+          <div class="shot"><span class="ph">images/thumbnails.png</span><img src="images/thumbnails.png" alt="Thumbnail brainstorming screen" onerror="this.remove()"></div>
+          <h3>No more blank screens</h3>
+          <p>Providing AI-driven inspiration, tailored to each creator's channel, directly addressing a critical pain point in the video creation process.</p>
+        </figure>
+        <figure>
+          <div class="shot"><span class="ph">images/idea-playground.png</span><img src="images/idea-playground.png" alt="Idea Playground screen" onerror="this.remove()"></div>
+          <h3>See the big picture</h3>
+          <p>Providing a comprehensive 'Idea Playground' to visualize and validate video concepts, including audience interest and key content elements, enabling informed decision-making.</p>
+        </figure>
+        <figure>
+          <div class="shot"><span class="ph">images/titles.png</span><img src="images/titles.png" alt="Titles and thumbnails brainstorm screen" onerror="this.remove()"></div>
+          <h3>Brainstorm thumbs &amp; titles</h3>
+          <p>Dedicated spaces for in-depth exploration of thumbnails and titles, allowing creators to experiment and refine their idea until it feels right!</p>
+        </figure>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Impact</h2>
+      <p>This Gen AI experience empowers millions of creators to unlock their full creative potential by facilitating brainstorming. It marked a pivotal shift in how YouTube supports evolving creator needs.</p>
+    </div>
+  </div>
+
+  <div class="quote">
+    <div class="wrap">
+      <blockquote>
+        <p>&ldquo;The YouTube Inspiration Tab can be one of the craziest hack ever&hellip;these outlines are so deep&hellip; it's crazy that YouTube will just give you popular topic in your niche and outline keywords to use interest charts&rdquo;</p>
+        <cite>@buildinpublic</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <div class="wrap closing">
+    <h2>&hellip;from initial concept to production in a rapid three-month cycle</h2>
+    <div class="shot" style="margin-top:48px">
+      <span class="ph">images/inspiration-outline.png</span>
+      <img src="images/inspiration-outline.png" alt="Inspiration tab outline view" onerror="this.remove()">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="page-about" data-title="About | Lilly Sosa">
+  <div class="wrap">
+    <div class="about-hero">
+      <p>Hola! I'm Lilly. A designer from Colombia, now making Z&uuml;rich my home. My journey has taken me through exciting challenges at <b>YouTube</b>, <b>Google Drive</b>, and Startups, always striving to build products that resonate with people.</p>
+    </div>
+  </div>
+  <hr>
+  <div class="wrap">
+    <div class="section">
+      <h2>My journey</h2>
+      <ul class="journey">
+        <li><span>2021 - Now</span><strong>Design Lead, Inspiration Tab Studio</strong></li>
+        <li><span>2020 - 2021</span><strong>Mobile UX lead, Google Drive</strong></li>
+        <li><span>2018 - 2020</span><strong>Interaction designer, Google Drive</strong></li>
+        <li><span>2016 - 2018</span><strong>Product Designer at NioLabs</strong></li>
+        <li><span>2014 - 2016</span><strong>Lead designer at Ninedot</strong></li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="wrap">
+    <div class="section">
+      <h2>My approach:<br>Strategic &amp; user-centered innovation</h2>
+      <p>What drives my work is a blend of deep user understanding and a bold vision for innovation. I love simplifying complex technology problems and collaboratively building solutions that are not only intuitive but also bring value to users. Throughout my career at Google Drive and now YouTube, I've had the privilege of leading high-impact projects that have reached hundreds of millions of users, driving adoption and boosting productivity and creativity. I actively champion a collaborative environment where diverse voices contribute to stronger, more innovative solutions, always ensuring the user's perspective is at the heart of every decision.</p>
+    </div>
+    <div class="photos">
+      <div class="shot"><span class="ph">images/ski.jpg</span><img src="images/ski.jpg" alt="Skiing in the Alps" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/bike.jpg</span><img src="images/bike.jpg" alt="Mountain biking on a forest trail" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/ridge.jpg</span><img src="images/ridge.jpg" alt="Climbing a rocky ridge" onerror="this.remove()"></div>
+      <div class="shot"><span class="ph">images/summit.jpg</span><img src="images/summit.jpg" alt="Standing on a mountain summit" onerror="this.remove()"></div>
+    </div>
+    <hr>
+    <div class="section">
+      <h2>Beyond design:<br>Embracing challenges</h2>
+      <p>When I'm not designing, you'll often find me exploring mountains &#9968;&#65039; &ndash; a place that constantly reminds me about the beauty of embracing challenges. For me, the thrill of navigating a new mountain bike trail or exploring a tricky ski slope as an adult isn't so different from diving into a complex design problem.</p>
+      <p>These experiences are truly humbling. They push me constantly physically and mentally. Every day I learn about resilience, adaptability, and the importance of staying open to continuous learning when I'm outside. I find that same spirit of humble exploration directly informs my approach to design and collaboration.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>Let's connect &#128075;</strong>
+    <div class="social">
+      <!-- Replace the # in each link with your real profile URLs -->
+      <a href="#" aria-label="LinkedIn" id="link-linkedin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6M8 7.5v.01M12 17v-6M12 13a2.5 2.5 0 0 1 5 0v4"/></svg></a>
+      <a href="mailto:hello@lillysosa.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+      <a href="#" aria-label="Instagram" id="link-instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Tiny hash router: #/ , #/about , #/inspiration
+  var pages = { "/": "page-home", "/about": "page-about", "/inspiration": "page-inspiration" };
+  function route() {
+    var h = location.hash;
+    if (h === "#overview") return; // in-page anchor on the case study
+    var key = h.replace(/^#/, "") || "/";
+    var id = pages[key] || "page-home";
+    document.querySelectorAll(".page").forEach(function (p) { p.classList.toggle("active", p.id === id); });
+    document.title = document.getElementById(id).dataset.title;
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", route);
+  route();
+
+  // Overview link scrolls without breaking the router
+  document.querySelectorAll('a[href="#overview"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("overview").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+  // Placeholder: set your video URL here
+  document.getElementById("watch-video").addEventListener("click", function (e) { e.preventDefault(); });
+</script>
+</body>
+</html>
