@@ -519,6 +519,7 @@
   #page-prototyping .pr-bento { grid-template-columns: 1fr 1fr; margin-top: 0; }
   #page-prototyping .pb { grid-column: auto; grid-row: auto; min-height: 0; padding: clamp(18px, 2vw, 24px); gap: 14px; border-radius: clamp(20px, 2.4vw, 28px); }
   #page-prototyping .pb b { font-size: clamp(40px, 5vw, 64px); }
+  #page-prototyping .pb-b b { font-size: clamp(34px, 4.2vw, 54px); white-space: nowrap; }
   #page-prototyping .pb span { font-size: clamp(13px, 1.2vw, 15px); }
   #page-prototyping .pb-a { justify-content: space-between; gap: 14px; }
   #page-prototyping .pb-eyebrow { font-size: 13px !important; }
@@ -527,7 +528,7 @@
   #page-prototyping .pb-row span { font-size: clamp(13px, 1.2vw, 15px); }
   #page-prototyping .pb-bar { height: 18px; }
   #page-prototyping .pb-row span b { font-size: inherit; display: inline; letter-spacing: inherit; }
-  #page-prototyping .pb-short { width: 14%; }
+  #page-prototyping .pb-short { width: 18%; }
   #page-prototyping .pb { justify-content: flex-start; } #page-prototyping .pb b + span { margin-top: auto; }
   #page-prototyping .pb-note { font-size: 11px !important; }
   #page-prototyping .pb-d { flex-direction: column; align-items: flex-start; justify-content: flex-start; padding-block: clamp(18px, 2vw, 24px); gap: 12px; }
@@ -569,9 +570,10 @@
   .ps-tabs button i { font-style: normal; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-size: 12px; font-weight: 700; background: rgba(255, 255, 255, .8); color: var(--ink); }
   .ps-tabs button.on { background: #14141c; color: #fff; }
   .ps-tabs button.on i { background: #fff; }
-  .ps-card { position: relative; margin-top: 12px; border-radius: clamp(24px, 3vw, 36px); background: rgba(20, 20, 40, .045); overflow: hidden; min-height: 364px; }
-  .ps-panel { display: none; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: stretch; min-height: 364px; }
-  .ps-panel.on { display: grid; animation: psIn .45s ease both; }
+  .ps-card { position: relative; display: flex; flex-direction: column; gap: 14px; }
+  .ps-panel { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); align-items: stretch; min-height: 340px; border-radius: clamp(24px, 3vw, 36px); background: rgba(20, 20, 40, .045); overflow: hidden; }
+  .pr-stage.js .ps-panel { opacity: 0; transform: translateY(32px); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
+  .pr-stage.js .ps-panel.on { opacity: 1; transform: none; }
   @keyframes psIn { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
   .ps-copy { padding: clamp(24px, 3.4vw, 44px); display: flex; flex-direction: column; justify-content: center; gap: 10px; }
   .ps-copy small { font-size: 13px; font-weight: 700; color: var(--muted); }
@@ -635,9 +637,9 @@
   .ps-panel.on .v4 .chip { animation: chipIn .5s 1.3s ease both; }
   .ps-nav { display: flex; gap: 10px; margin-top: 14px; }
   .ps-nav .btn[disabled] { opacity: .35; pointer-events: none; }
-  @media (max-width: 760px) { .ps-panel { grid-template-columns: minmax(0, 1fr); } .ps-copy { padding-bottom: 8px; } .ps-vis { min-height: 280px; } .ps-card { min-height: 0; } }
-  @media (prefers-reduced-motion: reduce) { .ps-panel.on, .ps-panel.on * { animation: none !important; } }
-  body.dark .ps-tabs button { background: rgba(255, 255, 255, .08); } body.dark .ps-tabs button.on { background: #fff; color: #14141c; } body.dark .ps-card { background: rgba(255, 255, 255, .05); }
+  @media (max-width: 760px) { .ps-panel { grid-template-columns: minmax(0, 1fr); } .ps-copy { padding-bottom: 8px; } .ps-vis { min-height: 280px; }  }
+  @media (prefers-reduced-motion: reduce) { .pr-stage.js .ps-panel { opacity: 1; transform: none; transition: none; } .ps-panel.on, .ps-panel.on * { animation: none !important; } }
+  body.dark .ps-tabs button { background: rgba(255, 255, 255, .08); } body.dark .ps-tabs button.on { background: #fff; color: #14141c; } body.dark .ps-panel { background: rgba(255, 255, 255, .05); }
   .challenge .three.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   @media (max-width: 1000px) { .challenge .three.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 560px) { .challenge .three.four { grid-template-columns: minmax(0, 1fr); } }
@@ -1105,6 +1107,24 @@
     html { scroll-behavior: auto; }
     html { scroll-snap-type: none; }
   }
+
+  /* Calmer surfaces: neutral cards, color only as an accent */
+  .projects .project { background: rgba(20, 20, 40, .045); }
+  body.dark .projects .project { background: rgba(255, 255, 255, .05); }
+  .now-panel { background: rgba(20, 20, 40, .045); }
+  body.dark .now-panel { background: rgba(255, 255, 255, .05); }
+  .challenge, body.dark .challenge { background: none; padding: 0 !important; }
+  .challenge .three figure, body.dark .challenge .three figure { background: rgba(20, 20, 40, .045); }
+  body.dark .challenge .three figure { background: rgba(255, 255, 255, .06); }
+  #page-trends .challenge .three figure::before, #page-notifications .challenge .three figure::before { content: ""; display: block; width: 28px; height: 28px; border-radius: 50%; margin-bottom: 18px; background: linear-gradient(135deg, var(--pc1), var(--pc2)); }
+  .pr-thumb, .pr-thumb:hover { text-decoration: none; color: inherit; }
+  .pr-thumb { display: grid; place-items: center; padding: clamp(18px, 4vw, 40px); aspect-ratio: 4 / 3; }
+  .pt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+  .pt-c { background: #fff; border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; justify-content: space-between; color: #0f0f0f; box-shadow: 0 10px 26px rgba(150, 70, 40, .12); }
+  .pt-c small { font-size: 12px; font-weight: 600; color: #606060; line-height: 1.25; }
+  .pt-c b { font-size: clamp(18px, 2.2vw, 28px); letter-spacing: -.03em; line-height: 1.05; font-weight: 700; }
+  .pt-a { grid-column: 1 / -1; } .pt-a b { font-size: clamp(22px, 3vw, 38px); }
+  .pt-d { background: #14141c; color: #fff; gap: 10px; } .pt-d svg { color: #ffd29a; } .pt-d b { font-size: clamp(16px, 1.8vw, 22px); }
 </style>
 </head>
 <body>
@@ -1133,8 +1153,8 @@
     <div class="stage">
     <div class="wrap hero hero-left">
       <div class="hero-copy">
-        <h1>I'm Lilly, Designer at YouTube</h1>
-        <p class="lead">Currently leading prototyping efforts at YouTube Creator</p>
+        <h1>I'm Lilly.<br>I help teams<br>build to learn.</h1>
+        <p class="lead">UX designer leading prototyping and Gen AI exploration at YouTube Creator</p>
         <div class="hero-actions"><a class="btn hero-link" href="#work">Some of my work<span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span></a></div>
       </div>
 
@@ -1207,6 +1227,21 @@
     <div class="projects" id="work">
       <article class="card project p-feature">
         <div class="project-copy">
+          <span class="p-kicker">Prototyping &middot; YouTube Creator</span>
+          <h2>From months to days: prototyping at YouTube Creator</h2>
+          <p>I lead prototyping at YouTube Creator, helping cross-functional teams test ideas with creators before committing engineering time. Recognized with a company-wide AI Innovation Award.</p>
+          <a class="btn" href="#/prototyping">See the impact<span class="arr" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        </div>
+        <a class="thumb pr-thumb" href="#/prototyping" style="--c1:#f9a58f;--c2:#fcd0a2" aria-label="Read the prototyping story">
+          <div class="pt-grid">
+            <div class="pt-c pt-a"><small>Time to validate</small><b>Months to ~10 days</b></div>
+            <div class="pt-c"><b>10 of 12</b><small>validated or pivoted their concept</small></div>
+            <div class="pt-c pt-d"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><b>AI Innovation Award</b></div>
+          </div>
+        </a>
+      </article>
+      <article class="card project p-wide">
+        <div class="project-copy">
           <span class="p-kicker">Case study &middot; YouTube Studio</span>
           <h2>Sparking Creativity with AI: The YouTube Inspiration Tab</h2>
           <p>Led the end-to-end UX for the AI-powered Inspiration tab within YouTube Studio, shaping the strategic vision and roadmap. This Gen AI experience supercharges creators' brainstorming, empowering them to unlock their full creative potential.</p>
@@ -1243,7 +1278,7 @@
         </a>
       </article>
       </div>
-      <article class="card project p-wide">
+      <article class="card project p-feature">
         <div class="project-copy">
           <span class="p-kicker">Case study &middot; Google Drive</span>
           <h2>Collaborative Flow: Google Drive's File Approvals</h2>
@@ -1266,19 +1301,19 @@
     <div class="wrap hero page-hero solo long">
       <div class="hero-copy">
         <span class="hero-meta">Prototyping &middot; YouTube Creator</span>
-        <h1>From months to 7 days<span class="h1-sub">Helping creator teams build to learn</span></h1>
-        <p class="lead">I lead prototyping at YouTube Creator, partnering with multidisciplinary teams to solve complex problems by making ideas tangible.</p>
+        <h1>From months to days.<span class="h1-sub">Helping creator teams build to learn.</span></h1>
+        <p class="lead">I lead prototyping at YouTube Creator, helping cross-functional teams test ideas with creators before committing engineering time.</p>
       </div>
       <div class="pr-bento">
         <div class="pb pb-a">
-          <span class="pb-eyebrow">Feature validation</span>
-          <div class="pb-bars" role="img" aria-label="Feature validation went from months to 7 days">
+          <span class="pb-eyebrow">Average time to validate</span>
+          <div class="pb-bars" role="img" aria-label="Feature validation went from months to roughly 10 days on average">
             <div class="pb-row"><i class="pb-bar pb-long"></i><span>Before: months</span></div>
-            <div class="pb-row"><i class="pb-bar pb-short"></i><span>With prototyping: <b>7 days</b></span></div>
+            <div class="pb-row"><i class="pb-bar pb-short"></i><span>Prototyping: <b>~10 days</b></span></div>
           </div>
           <p class="pb-note">Bars are illustrative, not to scale.</p>
         </div>
-        <div class="pb pb-b"><b>83%</b><span>of product teams pivoted or sharpened their roadmap with high confidence</span></div>
+        <div class="pb pb-b"><b>10 of 12</b><span>said it validated a core direction or drove a major pivot on their concept</span></div>
         <div class="pb pb-c"><b>100+</b><span>Designers and PMs upskilled to run rapid, low-code discovery sprints</span></div>
         <div class="pb pb-d"><svg class="aw-star" viewBox="0 0 24 24" width="64" height="64" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg><div class="aw-t"><small>Company-wide recognition</small><strong>AI Innovation Award</strong><span>For pioneering Gen AI-powered discovery workflows and driving prototype adoption across the company.</span></div></div>
     </div>
@@ -1287,13 +1322,12 @@
   <div class="wrap">
     <div class="block" id="pr-story">
       <h2>The bottleneck</h2>
-      <p>Validating a feature took months, because product exploration depended on heavy backend pipelines and engineering work. Good ideas waited in line, and teams had few ways to test them before committing.</p>
+      <p>Validating a feature took months. Exploring an idea meant backend pipelines and engineering time, so good ideas waited in line and teams had few ways to test them before committing.</p>
     </div>
 
     <div class="block">
       <h2>What I built</h2>
-      <p>I pioneered internal GenAI UI pipelines and component boilerplate that decoupled product exploration from engineering dependencies. Teams could explore and test ideas without waiting on engineering.</p>
-      <p style="margin-top:16px">The pieces are Gen AI UI &ldquo;legos&rdquo; and modular templates. Instead of building from scratch, teams snap together ready-made components and get something real to test.</p>
+      <p>A starter kit of YouTube Studio UI shells, design tokens and prompt templates: Gen AI UI &ldquo;legos.&rdquo; Teams snap ready-made components together instead of starting from a blank screen, and get something real in front of creators within hours.</p>
       <div class="lab big" aria-label="A short JSON prompt on the left becomes interface pieces on the right: chat, a metric, a video lockup, design tokens, a comment and buttons">
       <div class="code" role="group" aria-label="prototype.json. Edit the values to change the interface on the right">
         <div class="code-bar"><i></i><i></i><i></i><span>prototype.json</span><em><svg viewBox="0 0 16 16" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 2.5l2.5 2.5L5.5 13 2 13.5 2.5 10z"/></svg><span class="hint-d">Edit me 😊</span><span class="hint-m">Edit me 😊</span></em></div>
@@ -1337,24 +1371,17 @@
 
     <div class="block">
       <h2>Enabling workflows</h2>
-      <p>I built Gen AI-powered discovery workflows that let UXers, Product Managers and Engineers go from an idea to something testable without waiting on heavy backend pipelines.</p>
-      <p>Advanced workshops and playbooks made the workflows repeatable, including 100+ Designers and PMs running rapid, low-code discovery sprints.</p>
+      <p>Discovery sprints that take a team from a hunch to creator feedback in days, without waiting on heavy backend work.</p>
       <div class="pr-stage" id="prStage">
-        <div class="ps-tabs" role="tablist" aria-label="Steps from idea to decision">
-          <button type="button" role="tab" class="on" aria-selected="true"><i>1</i>An idea</button>
-          <button type="button" role="tab" aria-selected="false"><i>2</i>UI legos &amp; templates</button>
-          <button type="button" role="tab" aria-selected="false"><i>3</i>A working prototype</button>
-          <button type="button" role="tab" aria-selected="false"><i>4</i>Learning from creators</button>
-        </div>
         <div class="ps-card">
-          <div class="ps-panel on" role="tabpanel">
+          <div class="ps-panel" role="group" aria-label="Step 1">
             <div class="ps-copy"><small>Step 1</small><h3>An idea</h3><p>It starts with a hunch worth testing, before anyone writes a line of backend code.</p></div>
             <div class="ps-vis v1" aria-hidden="true">
               <div class="note"><span class="bulb"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.6.500 1 1.200 1 2.100h5c0-.9.400-1.600 1-2.100A6 6 0 0 0 12 3z"/></svg></span><b>What if creators could&hellip;</b><i class="l1"></i><i class="l2"></i><i class="l3"></i></div>
               <span class="chip c1">Hunch</span><span class="chip c2">Worth testing</span>
             </div>
           </div>
-          <div class="ps-panel" role="tabpanel">
+          <div class="ps-panel" role="group" aria-label="Step 2">
             <div class="ps-copy"><small>Step 2</small><h3>UI legos &amp; templates</h3><p>Modular, Gen AI-ready pieces. Teams snap together ready-made components instead of building from scratch.</p></div>
             <div class="ps-vis v2" aria-hidden="true">
               <div class="lg lg1"><em></em><em></em><span>Chat</span></div>
@@ -1363,7 +1390,7 @@
               <div class="lg lg4"><span class="bt"></span><span class="bt s"></span><span>Buttons</span></div>
             </div>
           </div>
-          <div class="ps-panel" role="tabpanel">
+          <div class="ps-panel" role="group" aria-label="Step 3">
             <div class="ps-copy"><small>Step 3</small><h3>A working prototype</h3><p>Something real, ready to put in front of creators, without waiting on engineering.</p></div>
             <div class="ps-vis v3" aria-hidden="true">
               <div class="phone">
@@ -1376,7 +1403,7 @@
               <span class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1zM7 11l4-7a2 2 0 0 1 2 2v4h5.500a2 2 0 0 1 2 2.300l-1.200 6.500a2 2 0 0 1-2 1.700H7"/></svg></span><span class="chip c5">Creator feedback</span>
             </div>
           </div>
-          <div class="ps-panel" role="tabpanel">
+          <div class="ps-panel" role="group" aria-label="Step 4">
             <div class="ps-copy"><small>Step 4</small><h3>Learning from creators</h3><p>Creators react to the prototype, so teams learn what lands before they build it. That feedback shapes what gets built next.</p></div>
             <div class="ps-vis v4" aria-hidden="true">
               <div class="fb f1"><img src="data:image/webp;base64,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M2I2bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaHGNedW20FJY4dvgCQWrisoAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYICy5LXJEpaN7iAIAB05iM+ph+aiLHX82pAv8cXc0rNDwpGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gU/F3X6yUoTdHMV23KrhhVAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTAAAAAAAAAAAAAAAAGRoYXNoWCCTCDoOV4f84F+IjyooITnlvLQOaxnwdcobxfQahLTje2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBkTymZsZW5ndGgZFocAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTpjZDYyYjI4Yy1jMTI5LTRjOWMtOTUyOS02MDE1NTE5ZDBiZTEvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDphNTIwN2I1Zi1hZGUyLTRj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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD2WECmR2NJ3jsXslkqCuD/itn78PUdS188+wuVWB2e+2LIrsVwHUSKaDlpaM8jn+R3qf4QH7BHJsCB/DMumLigKevsAA==" alt=""><div><b>Love this one!</b><span>Creator</span></div><em class="ok"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1zM7 11l4-7a2 2 0 0 1 2 2v4h5.500a2 2 0 0 1 2 2.300l-1.200 6.500a2 2 0 0 1-2 1.700H7"/></svg></em></div>
@@ -1386,30 +1413,26 @@
             </div>
           </div>
         </div>
-        <div class="ps-nav">
-          <button type="button" class="btn ps-prev" aria-label="Previous step">&larr; Back</button>
-          <button type="button" class="btn ps-next" aria-label="Next step">Next &rarr;</button>
-        </div>
       </div>
     </div>
 
     <div class="block challenge" style="max-width:none">
       <div>
         <h2>How it scaled</h2>
-        <p>Tools only help if people adopt them, so I scaled prototyping across global teams.</p>
+        <p>Tools only help if people adopt them, so I scaled prototyping across YouTube Creator and 6 core product areas.</p>
       </div>
       <div class="three">
         <figure style="--pc1:#c9d8ff;--pc2:#e2d9ff">
           <span class="ci-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1" fill="currentColor"/><circle cx="10" cy="7.5" r="1" fill="currentColor"/><circle cx="14.5" cy="7.5" r="1" fill="currentColor"/></svg></span><h3>Tools</h3>
-          <p>A modular template ecosystem of Gen AI UI legos, so starting a prototype never means starting from a blank screen.</p>
-        </figure>
-        <figure style="--pc1:#f6a9c6;--pc2:#ffb09a">
-          <span class="ci-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.500"/><path d="M22 9v6"/></svg></span><h3>Education &amp; hands-on adoption</h3>
-          <p>Advanced workshops and playbooks upskilled UXers, Product Managers and Engineers, including 100+ Designers and PMs running rapid, low-code discovery sprints.</p>
+          <p>A modular template ecosystem, so no prototype starts from a blank screen.</p>
         </figure>
         <figure style="--pc1:#fdd9b8;--pc2:#f6a9c6">
-          <span class="ci-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.500 1.200-2 4-2 4s2.800-.5 4-2"/><path d="M12 15l-3-3a20 20 0 0 1 2-4c2-3 5.500-4.500 10-4.500 0 4.500-1.500 8-4.500 10a20 20 0 0 1-4 2z"/><path d="M9 12H4s.5-3 2-4c1.500-1 5 0 5 0"/><path d="M12 15v5s3-.5 4-2c1-1.500 0-5 0-5"/><circle cx="16" cy="8" r="1.200" fill="currentColor"/></svg></span><h3>Proven impact</h3>
-          <p>83% of product teams pivoted or sharpened their roadmaps with high confidence.</p>
+          <span class="ci-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.500A2.500 2.500 0 0 1 6.500 3H20v15H6.500A2.500 2.500 0 0 0 4 20.500z"/><path d="M4 20.500A2.500 2.500 0 0 0 6.500 23H20v-5"/><path d="M9 8h7M9 12h5"/></svg></span><h3>Playbook</h3>
+          <p>A discovery-sprint guide that matches each hypothesis to the right tool, so teams test their riskiest assumption first.</p>
+        </figure>
+        <figure style="--pc1:#f6a9c6;--pc2:#ffb09a">
+          <span class="ci-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.4 2.7 3 6 3s6-1.6 6-3v-4.500"/><path d="M22 9v6"/></svg></span><h3>Education</h3>
+          <p>Hands-on bootcamps and workshops trained 100+ designers and PMs, and self-serve guides reached hundreds more.</p>
         </figure>
       </div>
     </div>
@@ -1417,9 +1440,9 @@
     <div class="block">
       <h2>What changed</h2>
       <ul>
-        <li>Increased adoption of prototyping across global teams</li>
-        <li>Accelerated product discovery, from months to just 7 days</li>
-        <li>More confident roadmaps: 83% of product teams pivoted or sharpened theirs</li>
+        <li>Increased adoption of prototyping across YouTube Creator and 6 core product areas</li>
+        <li>Accelerated product discovery, from months to roughly 10 days on average</li>
+        <li>Validated direction: 10 of 12 said it validated a core direction or drove a major pivot on their concept</li>
         <li>Recognized with the company-wide AI Innovation Award</li>
       </ul>
     </div>
@@ -1750,7 +1773,7 @@
     <div class="wrap hero page-hero">
       <div class="hero-copy">
         <h1>From Barranquilla to Z&uuml;rich</h1>
-        <p class="lead">When I&rsquo;m not building, I&rsquo;m usually exploring outside.</p>
+        <p class="lead">When I&rsquo;m not designing, I&rsquo;m usually on a trail.</p>
         <div class="hero-actions">
           <a class="btn hero-link" href="https://www.linkedin.com/in/lilly-sosa/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6M8 7.5v.01M12 17v-6M12 13a2.5 2.5 0 0 1 5 0v4"/></svg><span>Connect on LinkedIn</span></a>
         </div>
@@ -1798,8 +1821,8 @@
     </div>
     <div class="section">
       <span class="label">Beyond design</span>
-      <h2>Embracing challenges</h2>
-      <p>When I&rsquo;m not designing, you&rsquo;ll often find me exploring mountains &ndash; a place that constantly reminds me about the beauty of embracing challenges. For me, the thrill of navigating a new mountain bike trail or exploring a tricky ski slope as an adult isn't so different from diving into a complex design problem.</p>
+      <h2>Learning on the mountain</h2>
+      <p>I took up skiing and mountain biking as an adult, and they keep me humble. A new trail asks for the same things as a hard design problem: stay curious, adapt quickly, and get comfortable not knowing yet. That mindset shapes how I design and how I work with others.</p>
       <p>These experiences are truly humbling. They push me constantly physically and mentally. Every day I learn about resilience, adaptability, and the importance of staying open to continuous learning when I'm outside. I find that same spirit of humble exploration directly informs my approach to design and collaboration.</p>
     </div>
     <div class="section">
@@ -3105,12 +3128,13 @@
   box.addEventListener("mouseenter", function () { clearTimeout(t1); var d = img.offsetHeight - box.clientHeight; img.style.transition = "transform " + Math.max(5, d / 120) + "s cubic-bezier(.45,0,.25,1)"; img.style.transform = "translateY(" + (-d) + "px)"; });
   box.addEventListener("mouseleave", function () { img.style.transition = "transform 1.2s ease"; img.style.transform = "none"; });
 })();
-(function(){var st=document.getElementById("prStage");if(!st)return;var tabs=[].slice.call(st.querySelectorAll(".ps-tabs button")),ps=[].slice.call(st.querySelectorAll(".ps-panel")),pv=st.querySelector(".ps-prev"),nx=st.querySelector(".ps-next"),i=0,timer=null;
-function go(n){i=Math.max(0,Math.min(ps.length-1,n));ps.forEach(function(p,k){p.classList.toggle("on",k===i)});tabs.forEach(function(t,k){t.classList.toggle("on",k===i);t.setAttribute("aria-selected",k===i)});pv.disabled=i===0;nx.disabled=i===ps.length-1;var t=tabs[i];if(t&&t.scrollIntoView&&st.scrollWidth>0){var bar=t.parentNode;bar.scrollLeft=t.offsetLeft-12}}
-function stop(){if(timer){clearInterval(timer);timer=null}}
-tabs.forEach(function(t,k){t.addEventListener("click",function(){stop();go(k)})});pv.addEventListener("click",function(){stop();go(i-1)});nx.addEventListener("click",function(){stop();go(i+1)});
-go(0);var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;if(reduce||!("IntersectionObserver" in window))return;
-new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!timer&&!st.dataset.done){timer=setInterval(function(){if(i>=ps.length-1){stop();st.dataset.done="1";return}go(i+1)},4200)}else if(!e.isIntersecting){stop()}})},{threshold:.5}).observe(st)})();
+(function(){var st=document.getElementById("prStage");if(!st)return;var ps=[].slice.call(st.querySelectorAll(".ps-panel"));
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(reduce||!("IntersectionObserver" in window)){ps.forEach(function(p){p.classList.add("on")});return}
+st.classList.add("js");var ready=[],busy=false;
+function flush(){if(busy)return;for(var k=0;k<ps.length;k++){if(ps[k].classList.contains("on"))continue;if(ready[k]&&(k===0||ps[k-1].classList.contains("on"))){busy=true;ps[k].classList.add("on");setTimeout(function(){busy=false;flush()},650);return}break}}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){ready[ps.indexOf(e.target)]=true;io.unobserve(e.target)}});flush()},{threshold:.3});
+ps.forEach(function(p){io.observe(p)})})();
 </script>
 </body>
 </html>
